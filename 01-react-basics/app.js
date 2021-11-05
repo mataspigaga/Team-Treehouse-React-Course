@@ -43,23 +43,19 @@ const Player = (props) => {
 
 const Counter = (props) => {
   const [count, setCount] = useState(0);
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
 
   return (
     <div className="counter">
-      <button
-        className="counter-action decrement"
-        onClick={() => setCount((prevCount) => prevCount - 1)}
-      >
+      <button className="counter-action decrement" onClick={decrement}>
         {" "}
         -{" "}
       </button>
       <span className="counter-score">{count}</span>
-      <button
-        className="counter-action increment"
-        onClick={() => setCount((prevCount) => prevCount + 1)}
-      >
+      <button className="counter-action increment" onClick={increment}>
         {" "}
-        -{" "}
+        +{" "}
       </button>
     </div>
   );
