@@ -1,22 +1,18 @@
 const players = [
   {
     name: "Guil",
-    score: 50,
     id: 1,
   },
   {
     name: "Treasure",
-    score: 85,
     id: 2,
   },
   {
     name: "Ashley",
-    score: 95,
     id: 3,
   },
   {
     name: "James",
-    score: 80,
     id: 4,
   },
 ];
@@ -35,13 +31,16 @@ const Header = (props) => {
 const Player = (props) => {
   return (
     <div className="player">
+      <button className="remove-player" onClick={props.removePlayer} >
+        ✖
+      </button>
       <span className="player-name">{props.name}</span>
       <Counter />
     </div>
   );
 };
 
-const Counter = (props) => {
+const Counter = () => {
   const [count, setCount] = useState(0);
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count - 1);
@@ -62,19 +61,29 @@ const Counter = (props) => {
 };
 
 const App = (props) => {
+  const [playerList, setPlayerList] = useState(props.initialPlayers);
+  console.log(playerList)
+
+  const removePlayerHandler = (id) => {
+    console.log()
+  }; 
+
+
   return (
     <div className="scoreboard">
-      <Header title="Scoreboard" totalPlayers={props.initialPlayers.length} />
+      <Header title="Scoreboard" totalPlayers={playerList.length} />
 
       {/* Player's list */}
-      {props.initialPlayers.map((player) => (
-        <Player name={player.name} key={player.id.toString()} />
+      {playerList.map((player) => (
+        <Player
+          name={player.name}
+          id={player.id}
+          key={player.id.toString()}
+          removePlayer={removePlayerHandler}
+        />
       ))}
     </div>
   );
 };
 
-ReactDOM.render(
-  <App initialPlayers={players} />,
-  document.getElementById("root")
-);
+ReactDOM.render(<App initialPlayers={players} />, document.getElementById("root"));
